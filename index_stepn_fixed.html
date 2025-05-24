@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SatoshiJet</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at top, #0f0f0f, #1f1f1f);
+      color: #fff;
+    }
+    .hidden { display: none; }
+    .center {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    button {
+      background: #00ffc6;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #00cca4;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      background: #111;
+    }
+    #market {
+      padding: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #222;
+      border-radius: 20px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px #00ffc6;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <section id="intro" class="center">
+    <h1>SatoshiJet</h1>
+    <p>TRX Miner'larla kazanmaya başla</p>
+    <button onclick="enterApp()">🚀 Başla</button>
+  </section>
+
+  <main id="app" class="hidden">
+    <nav>
+      <button onclick="openDeposit()">💰 Para Yatır</button>
+      <button onclick="connectWallet()">🔌 Cüzdan</button>
+    </nav>
+
+    <section id="market">
+      <h2>🎛️ Cihaz Marketi</h2>
+      <div id="device-list" class="grid"></div>
+    </section>
+
+    <section id="deposit-screen" class="hidden">
+      <h2>💸 TRX Yatır</h2>
+      <p>TRX adresi: <strong>0x7936c169873c01ee8e1c2a1c126193efdf673f34</strong></p>
+      <input id="deposit-amount" type="number" placeholder="Miktar girin (TRX)"/>
+      <button onclick="depositTRX()">Yatır</button>
+    </section>
+  </main>
+
+  <script>
+    function enterApp() {
+      document.getElementById('intro').classList.add('hidden');
+      document.getElementById('app').classList.remove('hidden');
+      renderDevices();
+    }
+
+    function openDeposit() {
+      document.getElementById('deposit-screen').classList.toggle('hidden');
+    }
+
+    function connectWallet() {
+      alert("Cüzdan bağlantı özelliği eklenecek");
+    }
+
+    function depositTRX() {
+      const amount = parseFloat(document.getElementById("deposit-amount").value);
+      if (!amount || amount <= 0) {
+        alert("Geçersiz miktar");
+        return;
+      }
+      alert(amount + " TRX yatırıldı (demo)");
+    }
+
+    function renderDevices() {
+      const devices = [
+        { name: "Normal Miner", img: "https://api.dicebear.com/7.x/icons/svg?seed=miner1", rate: "3 TRX/gün" },
+        { name: "Epic Miner", img: "https://api.dicebear.com/7.x/icons/svg?seed=miner2", rate: "5 TRX/gün" },
+        { name: "Legend Miner", img: "https://api.dicebear.com/7.x/icons/svg?seed=miner3", rate: "7 TRX/gün" }
+      ];
+      const list = document.getElementById("device-list");
+      list.innerHTML = "";
+      devices.forEach(d => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${d.img}" />
+          <h3>${d.name}</h3>
+          <p>${d.rate}</p>
+        `;
+        list.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
