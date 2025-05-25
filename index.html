@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SatoshiJet - TRX Miner</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <header><h1>SatoshiJet Miner Panel</h1><p id="welcome"></p></header>
+  <nav>
+    <button onclick="showSection('market')">🎛️ Market</button>
+    <button onclick="showSection('deposit')">💸 Yatır</button>
+    <button onclick="showSection('withdraw')">📤 Çek</button>
+    <button onclick="showSection('wallet')">🔌 Cüzdan</button>
+  </nav>
+  <section id="market" class="section active"><h2>Market</h2><div id="device-list"></div></section>
+  <section id="deposit" class="section"><h2>TRX Yatır</h2><strong>TSHAtsqS2urrcurAc3ANPtc2ALLbjAZibn</strong>
+    <input type="number" id="deposit-amount" placeholder="100 TRX"><button onclick="depositTRX()">Yatır</button></section>
+  <section id="withdraw" class="section"><h2>TRX Çek</h2><input type="number" id="withdraw-amount"><button onclick="withdrawTRX()">Çekim Talebi</button></section>
+  <section id="wallet" class="section"><h2>Cüzdan</h2><p>Cüzdan: <span id="wallet-address"></span></p><button onclick="connectWallet()">Bağla</button></section>
+</body>
+</html>
